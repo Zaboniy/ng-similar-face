@@ -1,0 +1,20 @@
+name: Deploy Angular App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and Deploy Angular app to GitHub Pages
+      uses: bitovi/github-actions-angular-to-github-pages@v1
+      with:
+        # Optionally, specify the base href if needed
+        base-href: /ng-similar-face/
