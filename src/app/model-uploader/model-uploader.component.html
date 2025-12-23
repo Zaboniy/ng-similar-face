@@ -1,0 +1,64 @@
+<div class="max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md border border-gray-200">
+  <h3 class="text-lg font-bold text-gray-800 mb-3">ARC Face Model Uploader</h3>
+  
+  <div class="mb-3">
+    <input 
+      type="file" 
+      id="modelInput" 
+      accept=".onnx"
+      (change)="onModelSelected($event)"
+      [disabled]="isUploading()"
+      class="hidden"
+    />
+    <label for="modelInput" [class.opacity-50]="isUploading()" [class.cursor-not-allowed]="isUploading()" 
+      class="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg cursor-pointer font-medium text-sm transition-all duration-200 shadow-md hover:-translate-y-0.5 hover:shadow-lg">
+      @if (isUploading()) {
+        Uploading...
+      } @else {
+        Upload ONNX Model
+      }
+    </label>
+    <div class="mt-1 inline-flex items-center gap-1">
+      <p class="text-xs text-gray-500">Upload a custom ARC Face ONNX model (.onnx)</p>
+      <div class="relative group">
+        <svg class="w-4 h-4 text-blue-500 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <div class="invisible group-hover:visible absolute left-0 bottom-full mb-2 w-64 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+          <p class="font-semibold mb-2">Supported Models:</p>
+          <ul class="space-y-1">
+            <li>• <a href="https://huggingface.co/garavv/arcface-onnx" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-300">ArcFace ONNX</a></li>
+            <li>• <a href="https://huggingface.co/onnxmodelzoo/arcfaceresnet100-11-int8" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-300">ArcFaceResNet100-11-int8</a></li>
+          </ul>
+          <div class="absolute left-4 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="p-2 mb-3 bg-red-50 border border-red-200 rounded-lg">
+      <p class="text-sm text-red-700">{{ errorMessage() }}</p>
+    </div>
+  }
+
+  @if (modelLoaded()) {
+    <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm font-semibold text-green-800">Model Loaded</p>
+          <p class="text-xs text-green-600 mt-0.5">{{ modelName() }}</p>
+        </div>
+        <button 
+          (click)="clearModel()" 
+          class="px-4 py-1.5 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 transition-colors">
+          Clear
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+      <p class="text-sm text-gray-600">No onnx model loaded. Using face-api model.</p>
+    </div>
+  }
+</div>

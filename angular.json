@@ -22,10 +22,14 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "scripts": [
+              "/public/face-api.min.js"
             ]
           },
           "configurations": {
