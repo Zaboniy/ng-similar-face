@@ -1,5 +1,5 @@
 {
-  "name": "lookalike",
+  "name": "ng-similar-face",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

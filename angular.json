@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "lookalike": {
+    "ng-similar-face": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "lookalike:build:production"
+              "buildTarget": "ng-similar-face:build:production"
             },
             "development": {
-              "buildTarget": "lookalike:build:development"
+              "buildTarget": "ng-similar-face:build:development"
             }
           },
           "defaultConfiguration": "development"

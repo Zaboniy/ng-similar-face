@@ -16,7 +16,7 @@ export class App {
   private arcDetector = inject(ArcDetector);
   private faceApiDetector = inject(FaceApiDetector);
   
-  protected readonly title = signal('lookalike');
+  protected readonly title = signal('ng-similar-face');
   firstImageEmbedding = signal<Float32Array | null>(null);
   secondImageEmbedding = signal<Float32Array | null>(null);
   similarityLabel = signal<SimilarityDescription | null>(null);
