@@ -1,20 +1,26 @@
-name: Deploy Angular App
-
+name: Build and Deploy
 on:
   push:
     branches:
-      - main
-
+      - main  # Set this to your default branch
+permissions:
+  contents: write  # Critical for pushing to gh-pages branch
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout 🛠️
+        uses: actions/checkout@v4
 
-    - name: Build and Deploy Angular app to GitHub Pages
-      uses: bitovi/github-actions-angular-to-github-pages
-      with:
-        # Optionally, specify the base href if needed
-        base-href: /ng-similar-face/
+      - name: Install and Build 🏗️
+        run: |
+          npm ci
+          # Replace 'ng-similar-face' with your actual repository name
+          npm run build -- --base-href /ng-similar-face/
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          # Angular 18+ output is usually 'dist/ng-similar-face/browser'
+          folder: dist/ng-similar-face/browser 
